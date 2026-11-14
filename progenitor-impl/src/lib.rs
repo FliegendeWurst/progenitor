@@ -388,6 +388,7 @@ impl Generator {
             .map(|(path, method, operation, path_parameters)| {
                 self.process_operation(operation, &spec.components, path, method, path_parameters)
             })
+            .filter(|x| x.is_ok())
             .collect::<Result<Vec<_>>>()?;
 
         let operation_code = match (&self.settings.interface, &self.settings.tag) {
